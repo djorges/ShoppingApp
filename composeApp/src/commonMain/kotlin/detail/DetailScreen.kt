@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
@@ -45,7 +46,8 @@ fun DetailScreen(
             }
         ) {
             Column(
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize().padding(16.dp)
             ){
                 Text("Product Title: ${modelState.value.item.title}")
                 Text("Product Description: ${modelState.value.item.description}")

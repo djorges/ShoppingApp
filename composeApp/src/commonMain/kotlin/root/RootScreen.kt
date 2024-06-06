@@ -1,5 +1,6 @@
 package root
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
@@ -13,14 +14,16 @@ fun RootScreen(
     component: RootComponent,
     modifier: Modifier = Modifier
 ){
-    Children(
-        stack = component.stack,
-        modifier = modifier,
-        animation = stackAnimation(fade())
-    ){
-        when(val child = it.instance){
-            is RootComponent.Child.ListChild -> ListScreen(child.component)
-            is RootComponent.Child.DetailChild -> DetailScreen(child.component)
+    MaterialTheme {
+        Children(
+            stack = component.stack,
+            modifier = modifier,
+            animation = stackAnimation(fade())
+        ) {
+            when (val child = it.instance) {
+                is RootComponent.Child.ListChild -> ListScreen(child.component)
+                is RootComponent.Child.DetailChild -> DetailScreen(child.component)
+            }
         }
     }
 }

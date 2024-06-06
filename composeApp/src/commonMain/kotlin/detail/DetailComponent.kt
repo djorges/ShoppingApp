@@ -20,13 +20,13 @@ interface DetailComponent {
 class DefaultDetailComponent(
     private val componentContext: ComponentContext,
     private val item:ProductDto,
-    private val onBackPressed:() -> Unit
+    private val onBackPressedAction:() -> Unit
 ): DetailComponent, ComponentContext by componentContext{
     private val _model = MutableValue(DetailComponent.Model(item = item))
     override val model: Value<DetailComponent.Model> = _model
 
     override fun onBackPressed() {
-        onBackPressed()
+        onBackPressedAction()
     }
 
     init {
