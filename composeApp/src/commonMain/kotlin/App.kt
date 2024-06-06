@@ -5,6 +5,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,14 +17,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -42,104 +39,94 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import org.jetbrains.compose.ui.tooling.preview.Preview
+import data.ProductDto
+import list.ListComponent
 
-
-@Composable
-@Preview
-fun App() {
-    val viewModel = MainViewModel()
-    MaterialTheme {
-        AppContent(viewModel = viewModel)
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppContent(
-    modifier: Modifier = Modifier,
-    viewModel: MainViewModel
+    products: State<ListComponent.Model>,
+    onProductClick: (ProductDto) -> Unit = {}
 ){
-    val products by viewModel.products.collectAsState()
-    val scrollState = rememberLazyGridState()
-
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    MaterialTheme {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
-            SearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                query = "",
-                onQueryChange = { },
-                active = false,
-                onActiveChange = { },
-                onSearch = { },
-                leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "")},
-                placeholder = { Text("Search") }
+            //Search Bar
+            Column(
+                modifier = Modifier.fillMaxWidth()
             ){
+                SearchBar(
+                    modifier = Modifier.fillMaxWidth(),
+                    query = "",
+                    onQueryChange = { },
+                    active = false,
+                    onActiveChange = { },
+                    onSearch = { },
+                    leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "")},
+                    placeholder = { Text("Search") }
+                ){
 
+                }
             }
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-       LazyVerticalGrid(
-           modifier = Modifier,
-           state = scrollState,
-           columns = GridCells.Adaptive(90.dp),
-           contentPadding = PaddingValues(10.dp)
-       ) {
-           //Search Bar
-
-
-           //Products List
-           items(items = products, key = {it.id.toString()}){
-               Card(
-                   modifier = Modifier.padding(8.dp).fillMaxWidth(),
-                   shape = RoundedCornerShape(16.dp),
-                   elevation = 4.dp
-               ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        AsyncImage(
-                            model = it.image,
-                            contentDescription = it.title,
-                            modifier = Modifier.height(130.dp).padding(8.dp),
-                            contentScale = ContentScale.Fit,
-                        )
-                        Text(
-                            text = it.title.toString(),
-                            maxLines = 2,
-                            fontSize = 13.sp,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier.padding(horizontal = 8.dp).heightIn(min = 40.dp)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Box(
-                            modifier = Modifier.fillMaxWidth(),
-                            contentAlignment = Alignment.CenterStart
+            Spacer(modifier = Modifier.height(8.dp))
+            //Products List
+            LazyVerticalGrid(
+                modifier = Modifier,
+                state = rememberLazyGridState(),
+                columns = GridCells.Adaptive(90.dp),
+                contentPadding = PaddingValues(10.dp)
+            ) {
+                items(items = products.value.items, key = {it.id.toString()}){
+                    Card(
+                        modifier = Modifier.padding(8.dp).fillMaxWidth().clickable {
+                            onProductClick(it)
+                        },
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = 4.dp
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ){
+                            AsyncImage(
+                                model = it.image,
+                                contentDescription = it.title,
+                                modifier = Modifier.height(130.dp).padding(8.dp),
+                                contentScale = ContentScale.Fit,
+                            )
                             Text(
-                                text = "${it.price.toString()}$",
+                                text = it.title.toString(),
+                                maxLines = 2,
                                 fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold,
                                 overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier.padding(horizontal = 8.dp).heightIn(min = 40.dp)
                             )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.CenterStart
+                            ){
+                                Text(
+                                    text = "${it.price.toString()}$",
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.padding(horizontal = 8.dp).heightIn(min = 40.dp)
+                                )
+                            }
                         }
                     }
-               }
-           }
-       }
+                }
+            }
+        }
     }
 }
 

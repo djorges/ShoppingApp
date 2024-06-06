@@ -61,6 +61,9 @@ kotlin {
             implementation(libs.mvvm.core)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

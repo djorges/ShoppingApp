@@ -1,24 +1,24 @@
 package org.example.shopapp
 
-import App
+import MainViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
+import root.DefaultRootComponent
+import root.RootScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val rootComponent = DefaultRootComponent(
+            componentContext = defaultComponentContext(),
+            mainViewModel = MainViewModel()
+        )
+
         setContent {
-            App()
+            RootScreen(component = rootComponent)
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }
