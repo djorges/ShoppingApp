@@ -1,5 +1,13 @@
 # ShoppingApp
 
+## Screenshots
+<p align="center">
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/screen_mobile.png" alt="Screenshot Mobile" width="150" height="500"/>
+</p>
+<p align="center">
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/screen_desktop.png" alt="Screenshot Desktop" width="800" height="400"/>
+</p>
+
 ## Description
 Kotlin Multiplatform application for Android, IOS and Desktop. Allows you to search and display a list of products fetched from FakeStore Api. For the backend, the following libraries are used: Ktor, Koin, Coroutines and Flows. For the design of the application the following are used: Jetpack Compose, Coil, Kotlin 2.0, Material Design 3 and Decompose.
 
