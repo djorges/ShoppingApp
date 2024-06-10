@@ -1,21 +1,30 @@
 package org.example.shopapp
 
-import MainViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
-import root.DefaultRootComponent
+import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
+import root.RootComponent
 import root.RootScreen
 
 class MainActivity : ComponentActivity() {
+
+    private val rootComponent: RootComponent by inject()
+
+    private val contextModule = module{
+        single<ComponentContext> { defaultComponentContext() }
+    }
+
+    init {
+        loadKoinModules(contextModule)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val rootComponent = DefaultRootComponent(
-            componentContext = defaultComponentContext(),
-            mainViewModel = MainViewModel()
-        )
 
         setContent {
             RootScreen(component = rootComponent)

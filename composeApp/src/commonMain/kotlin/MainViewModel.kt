@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
-class MainViewModel : ViewModel() {
-    private val mainRepository = MainRepository()
+class MainViewModel(
+    private val mainRepository: MainRepository
+) : ViewModel() {
 
     private val _products = MutableStateFlow<List<ProductDto>>(emptyList())
     val products = _products.asStateFlow()

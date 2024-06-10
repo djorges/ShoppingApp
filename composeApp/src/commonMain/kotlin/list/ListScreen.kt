@@ -48,7 +48,7 @@ fun ListScreen(
     ){
         //Search Bar
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().padding(8.dp),
         ){
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
@@ -63,7 +63,6 @@ fun ListScreen(
 
             }
         }
-        Spacer(modifier = Modifier.height(8.dp))
         //Products List
         LazyVerticalGrid(
             modifier = Modifier,
