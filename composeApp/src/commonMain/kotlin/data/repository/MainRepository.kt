@@ -1,7 +1,8 @@
-package data
+package data.repository
 
-import db.datasource.ProductLocalDataSource
-import db.datasource.ProductRemoteDataSource
+import data.dto.ProductDto
+import data.datasource.ProductLocalDataSource
+import data.datasource.ProductRemoteDataSource
 import kotlinx.coroutines.flow.flow
 import org.example.shopapp.database.Product
 

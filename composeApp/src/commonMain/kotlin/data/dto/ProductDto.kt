@@ -1,4 +1,4 @@
-package data
+package data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -21,7 +21,7 @@ data class ProductDto (
     val price:Double? = null,
 
     @SerialName("rating")
-    val rating:RatingDto? = null,
+    val rating: RatingDto? = null,
 
     @SerialName("title")
     val title:String? = null

@@ -1,4 +1,4 @@
-package db
+package data.db
 
 import android.content.Context
 import app.cash.sqldelight.async.coroutines.synchronous

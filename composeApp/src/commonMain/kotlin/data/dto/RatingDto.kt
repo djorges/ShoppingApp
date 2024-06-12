@@ -1,4 +1,4 @@
-package data
+package data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

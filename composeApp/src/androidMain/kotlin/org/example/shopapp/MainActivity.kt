@@ -5,12 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
-import db.DriverFactory
+import data.db.DriverFactory
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
-import root.RootComponent
-import root.RootScreen
+import presentation.root.RootComponent
+import presentation.root.RootScreen
 
 class MainActivity : ComponentActivity() {
 

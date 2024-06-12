@@ -1,4 +1,4 @@
-package db
+package data.db
 
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

@@ -1,12 +1,12 @@
 package di
 
-import MainViewModel
-import data.MainRepository
-import db.datasource.ProductLocalDataSource
-import db.datasource.ProductRemoteDataSource
+import presentation.viewmodel.MainViewModel
+import data.repository.MainRepository
+import data.datasource.ProductLocalDataSource
+import data.datasource.ProductRemoteDataSource
 import org.koin.dsl.module
-import root.DefaultRootComponent
-import root.RootComponent
+import presentation.root.DefaultRootComponent
+import presentation.root.RootComponent
 
 fun commonModule() = cacheModule() + networkModule() + module{
     single {

@@ -1,7 +1,7 @@
 import androidx.compose.ui.window.ComposeUIViewController
 import di.initKoinIOS
-import root.RootComponent
-import root.RootScreen
+import presentation.root.RootComponent
+import presentation.root.RootScreen
 
 val koin = initKoinIOS().koin
 

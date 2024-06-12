@@ -1,4 +1,4 @@
-package root
+package presentation.root
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -6,8 +6,8 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
-import detail.DetailScreen
-import list.ListScreen
+import presentation.detail.DetailScreen
+import presentation.list.ListScreen
 
 @Composable
 fun RootScreen(

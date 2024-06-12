@@ -1,6 +1,6 @@
-package root
+package presentation.root
 
-import MainViewModel
+import presentation.viewmodel.MainViewModel
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
@@ -8,16 +8,16 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import data.ProductDto
-import detail.DefaultDetailComponent
-import detail.DetailComponent
+import data.dto.ProductDto
+import presentation.detail.DefaultDetailComponent
+import presentation.detail.DetailComponent
 import kotlinx.serialization.Serializable
-import list.DefaultListComponent
-import list.ListComponent
+import presentation.list.DefaultListComponent
+import presentation.list.ListComponent
 
 interface RootComponent {
 
-    val stack:Value<ChildStack<*,Child>>
+    val stack:Value<ChildStack<*, Child>>
 
     //Optional: pop multiple screens at a time on iOS
     fun onBackClicked()
@@ -56,12 +56,12 @@ class DefaultRootComponent(
     private fun child(config: Config, componentContext: ComponentContext): RootComponent.Child =
         when (config) {
             is Config.List -> RootComponent.Child.ListChild(
-                DefaultListComponent(componentContext,mainViewModel){ item ->
+                DefaultListComponent(componentContext, mainViewModel) { item ->
                     navigation.push(Config.Details(item))
                 }
             )
             is Config.Details -> RootComponent.Child.DetailChild(
-                DefaultDetailComponent(componentContext, config.item){
+                DefaultDetailComponent(componentContext, config.item) {
                     onBackClicked()
                 }
             )

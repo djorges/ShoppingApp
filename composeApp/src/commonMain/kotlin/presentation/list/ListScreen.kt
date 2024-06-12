@@ -1,4 +1,4 @@
-package list
+package presentation.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,10 +22,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -40,6 +47,7 @@ fun ListScreen(
     listComponent: ListComponent
 ){
     val products = listComponent.model.subscribeAsState()
+    var query by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -52,15 +60,15 @@ fun ListScreen(
         ){
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
-                query = "",
-                onQueryChange = { },
-                active = false,
+                query = query,
+                onQueryChange = { query = it },
                 onActiveChange = { },
                 onSearch = { },
+                active = false,
                 leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") },
                 placeholder = { Text("Search") }
             ){
-
+                //TODO:
             }
         }
         //Products List
@@ -91,6 +99,7 @@ fun ListScreen(
                         )
                         Text(
                             text = it.title.toString(),
+                            fontWeight = FontWeight.SemiBold,
                             maxLines = 2,
                             fontSize = 13.sp,
                             overflow = TextOverflow.Ellipsis,
@@ -102,8 +111,9 @@ fun ListScreen(
                             contentAlignment = Alignment.CenterStart
                         ){
                             Text(
-                                text = "${it.price.toString()}$",
+                                text = "$${it.price}",
                                 fontSize = 13.sp,
+                                color = Color(0xFF0F9D58),
                                 fontWeight = FontWeight.Bold,
                                 overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier.padding(horizontal = 8.dp).heightIn(min = 40.dp)

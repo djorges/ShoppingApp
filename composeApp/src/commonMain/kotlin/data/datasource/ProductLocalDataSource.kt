@@ -1,7 +1,7 @@
-package db.datasource
+package data.datasource
 
 import app.cash.sqldelight.async.coroutines.awaitAsList
-import db.DbHelper
+import data.db.DbHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
