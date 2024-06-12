@@ -2,10 +2,14 @@
 
 ## Screenshots
 <p align="center">
-    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/screen_mobile.png" alt="Screenshot Mobile" width="150" height="500"/>
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/mobile1.png" alt="Screenshot Mobile" width="150" height="500"/>
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/mobile2.png" alt="Screenshot Mobile" width="150" height="500"/>
 </p>
 <p align="center">
-    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/screen_desktop.png" alt="Screenshot Desktop" width="800" height="400"/>
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/desktop1.png" alt="Screenshot Desktop" width="800" height="400"/>
+</p>
+<p align="center">
+    <img src="https://github.com/djorges/ShoppingApp/blob/master/composeApp/src/androidMain/res/drawable/desktop2.png" alt="Screenshot Desktop" width="800" height="400"/>
 </p>
 
 ## Description
