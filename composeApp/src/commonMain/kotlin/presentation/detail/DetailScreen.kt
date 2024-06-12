@@ -76,7 +76,7 @@ fun DetailScreen(
                     },
                     actions = {
                         //Add to wishlist Button
-                        IconButton(onClick = { /*TODO: */ }) {
+                        IconButton(onClick = { /*  */ }) {
                             Icon(imageVector = Icons.Filled.Star, contentDescription = "Add to wishlist")
                         }
                     },

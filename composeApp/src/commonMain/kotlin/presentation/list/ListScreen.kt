@@ -22,14 +22,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,18 +36,17 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
     listComponent: ListComponent
 ){
     val products = listComponent.model.subscribeAsState()
-    var query by remember { mutableStateOf("") }
+    val searchText = listComponent.getSearchText().collectAsState()
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize()
     ){
         //Search Bar
         Column(
@@ -60,15 +54,15 @@ fun ListScreen(
         ){
             SearchBar(
                 modifier = Modifier.fillMaxWidth(),
-                query = query,
-                onQueryChange = { query = it },
+                query = searchText.value,
+                onQueryChange = { listComponent.onSearchTextChanged(it) },
                 onActiveChange = { },
                 onSearch = { },
                 active = false,
                 leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") },
                 placeholder = { Text("Search") }
             ){
-                //TODO:
+
             }
         }
         //Products List

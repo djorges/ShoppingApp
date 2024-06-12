@@ -56,9 +56,12 @@ class DefaultRootComponent(
     private fun child(config: Config, componentContext: ComponentContext): RootComponent.Child =
         when (config) {
             is Config.List -> RootComponent.Child.ListChild(
-                DefaultListComponent(componentContext, mainViewModel) { item ->
-                    navigation.push(Config.Details(item))
-                }
+                DefaultListComponent(
+                    componentContext,
+                    mainViewModel,
+                    { item -> navigation.push(Config.Details(item))},
+                    { text -> mainViewModel.searchProducts(text) }
+                )
             )
             is Config.Details -> RootComponent.Child.DetailChild(
                 DefaultDetailComponent(componentContext, config.item) {
