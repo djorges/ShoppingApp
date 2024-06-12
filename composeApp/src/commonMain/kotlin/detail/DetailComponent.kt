@@ -4,9 +4,6 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import data.ProductDto
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 interface DetailComponent {
     val model: Value<Model>
@@ -27,11 +24,5 @@ class DefaultDetailComponent(
 
     override fun onBackPressed() {
         onBackPressedAction()
-    }
-
-    init {
-        CoroutineScope(Dispatchers.Default).launch {
-            //TODO:
-        }
     }
 }

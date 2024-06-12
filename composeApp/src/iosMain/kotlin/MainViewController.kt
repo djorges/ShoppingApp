@@ -1,16 +1,12 @@
 import androidx.compose.ui.window.ComposeUIViewController
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import root.DefaultRootComponent
+import di.initKoinIOS
+import root.RootComponent
 import root.RootScreen
 
-fun MainViewController() = ComposeUIViewController {
-    val mainViewModel = MainViewModel()
+val koin = initKoinIOS().koin
 
-    val root = DefaultRootComponent(
-        componentContext = DefaultComponentContext(LifecycleRegistry()),
-        mainViewModel = mainViewModel
-    )
+fun MainViewController() = ComposeUIViewController {
+    val root = koin.get<RootComponent>()
 
     RootScreen(component = root)
 }

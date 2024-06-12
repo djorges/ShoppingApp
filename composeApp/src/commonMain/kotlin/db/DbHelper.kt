@@ -7,8 +7,12 @@ import org.example.shopapp.AppDatabase
 
 class DbHelper(private val driverFactory: DriverFactory) {
     private var database: AppDatabase? = null
-
     private val mutex = Mutex()
+
+
+    private suspend fun getDatabase(driverFactory: DriverFactory):AppDatabase {
+        return AppDatabase(driver = driverFactory.createDriver())
+    }
 
     suspend fun <Result:Any> withDatabase(
         block: suspend (AppDatabase) -> Result
@@ -17,9 +21,5 @@ class DbHelper(private val driverFactory: DriverFactory) {
             database = getDatabase(driverFactory)
         }
         return@withLock block(database!!)
-    }
-
-    private suspend fun getDatabase(driverFactory: DriverFactory):AppDatabase {
-        return AppDatabase(driver = driverFactory.createDriver())
     }
 }

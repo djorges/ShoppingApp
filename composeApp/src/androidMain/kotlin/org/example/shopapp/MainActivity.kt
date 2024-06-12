@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
+import db.DriverFactory
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -17,6 +18,7 @@ class MainActivity : ComponentActivity() {
 
     private val contextModule = module{
         single<ComponentContext> { defaultComponentContext() }
+        single{ DriverFactory(applicationContext) }
     }
 
     init {
